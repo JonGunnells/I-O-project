@@ -1,6 +1,5 @@
-import jodd.json.JsonParser;
-import jodd.json.JsonSerializer;
 
+import jodd.json.JsonSerializer;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,35 +7,49 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    static final String GAME = "videoGame.json";
+    public static void main(String[] args) {
+
         HashMap game = new HashMap();
-
-        game.put("name", "Doom");
-        game.put("difficulty", "hard");
-        game.put("genre", "Horror");
-        game.put("developer", "io Studios");
-        game.put("rating", "mature");
+        Scanner choiceScanner = new Scanner(System.in);
 
 
-        Game person2 = new Game();
+            System.out.println("Enter name");
+            String name = choiceScanner.nextLine();
+            System.out.println("Enter Difficulty ");
+            String difficulty = choiceScanner.nextLine();
+            System.out.println("Enter Genre");
+            String genre = choiceScanner.nextLine();
+            System.out.println("Enter Developer");
+            String developer = choiceScanner.nextLine();
+            System.out.println("Enter Rating");
+            String rating = choiceScanner.nextLine();
+            game.put("Name", name);
+            game.put("Difficulty", difficulty);
+            game.put("Genre", genre);
+            game.put("Developer", developer);
+            game.put("Rating", rating);
 
-        File f = new File("VideoGame.json");
+
+        save(game, GAME);
+    }
 
 
+
+    public static void save(HashMap game, String fileName) {
+        File f = new File(fileName);
         JsonSerializer serializer = new JsonSerializer();
         String json = serializer.serialize(game);
-        FileWriter fw = new FileWriter(f);
-        fw.write(json);
-        fw.close();
-
-
-        Scanner scanner = new Scanner(f);
-        scanner.useDelimiter("\\z");
-        String contents = scanner.next();
-        JsonParser parser = new JsonParser();
-
-        Game person3 = parser.parse(contents, Game.class);
-        System.out.println(person3);
-
+        try {
+            FileWriter fw = new FileWriter(f);
+            fw.write(json);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
+
+
 }

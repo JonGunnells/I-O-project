@@ -3,12 +3,12 @@ import java.util.Arrays;
 
 public class Game {
     static int fieldSize = 10;
-    String name;
-    String difficulty;
-    String genre;
-    String developer;
-    String rating;
-    Game[] field = new Game[fieldSize];
+    public String name;
+    public String difficulty;
+    public String genre;
+    public String developer;
+    public String rating;
+    public Game[] field = new Game[fieldSize];
 
     public Game() {
 
